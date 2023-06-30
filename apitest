@@ -1,0 +1,16 @@
+ef getDetailAddress2():
+    tt = muti_thread_test()
+    for i in range(500):
+        tt.test_btcBlockNumber()
+        tt.test_agency()
+        # tt.test_risk_address()
+    return "ok"
+
+def muti_thread_test_main():
+    tt = muti_thread_test()
+
+    request_thread = ThreadPoolExecutor(max_workers=20)
+    # datas = fewLabelSpider(ROOT_DIR + "/tmp/wall_data_tmp/all_labels_brief20211217.csv", label_list)
+    all_task = [request_thread.submit(getDetailAddress2)]
+    for future in as_completed(all_task):
+        future.result()
